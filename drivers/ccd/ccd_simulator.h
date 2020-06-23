@@ -199,10 +199,6 @@ class CCDSim : public INDI::CCD, public INDI::FilterInterface
         ISwitchVectorProperty SimulateRgbSP;
         ISwitch SimulateRgbS[2];
 
-        //  We are going to snoop these from focuser
-        INumberVectorProperty FWHMNP;
-        INumber FWHMN[1];
-
         // Focuser positions for focusing simulation
         // FocuserPosition[0] is the position where the scope is in focus
         // FocuserPosition[1] is the maximal position the focuser may move to (@see FOCUS_MAX in #indifocuserinterface.cpp)
