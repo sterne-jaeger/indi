@@ -29,8 +29,12 @@
 #define FOCUSNAMEF1 "FocusLynx F1"
 #define FOCUSNAMEF2 "FocusLynx F2"
 
-static std::unique_ptr<FocusLynxF1> lynxDriveF1(new FocusLynxF1("F1"));
-static std::unique_ptr<FocusLynxF2> lynxDriveF2(new FocusLynxF2("F2"));
+
+// Hub shared between both focusers
+static FocusLynxHub *focusHub(new FocusLynxHub());
+
+static std::unique_ptr<FocusLynxF1> lynxDriveF1(new FocusLynxF1(focusHub, "F1"));
+static std::unique_ptr<FocusLynxF2> lynxDriveF2(new FocusLynxF2(focusHub, "F2"));
 
 /************************************************************************************
 *
@@ -41,7 +45,7 @@ static std::unique_ptr<FocusLynxF2> lynxDriveF2(new FocusLynxF2("F2"));
 /************************************************************************************
  *
 * ***********************************************************************************/
-FocusLynxF1::FocusLynxF1(const char *target)
+FocusLynxF1::FocusLynxF1(FocusLynxHub *hub, const char *target) : FocusLynxBase(hub, target)
 {
     /* Override the original constructor
      * and give the Focuser target
@@ -749,7 +753,7 @@ void FocusLynxF1::setDebug(bool enable)
 /************************************************************************************
  *
 * ***********************************************************************************/
-FocusLynxF2::FocusLynxF2(const char *target)
+FocusLynxF2::FocusLynxF2(FocusLynxHub *hub, const char *target) : FocusLynxBase(hub, target)
 {
     setFocusTarget(target);
 

@@ -20,6 +20,7 @@
 #pragma once
 
 #include "focuslynxbase.h"
+#include "focuslynxhub.h"
 
 #define FOCUSNAMEF1 "FocusLynx F1"
 #define FOCUSNAMEF2 "FocusLynx F2"
@@ -27,7 +28,7 @@
 class FocusLynxF1 : public FocusLynxBase
 {
     public:
-        explicit FocusLynxF1(const char *target);
+        explicit FocusLynxF1(FocusLynxHub *hub, const char *target);
         ~FocusLynxF1();
 
         const char *getDefaultName() override;
@@ -62,7 +63,7 @@ class FocusLynxF1 : public FocusLynxBase
 class FocusLynxF2 : public FocusLynxBase
 {
     public:
-        explicit FocusLynxF2(const char *target);
+        explicit FocusLynxF2(FocusLynxHub *hub, const char *target);
         ~FocusLynxF2();
 
         const char *getDefaultName() override;

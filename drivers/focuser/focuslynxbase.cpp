@@ -22,8 +22,10 @@
 /************************************************************************************
  *
 * ***********************************************************************************/
-FocusLynxBase::FocusLynxBase(const char *target)
+FocusLynxBase::FocusLynxBase(FocusLynxHub *hub, const char *target)
+
 {
+    setFocusHub(hub);
     INDI_UNUSED(target);
 }
 

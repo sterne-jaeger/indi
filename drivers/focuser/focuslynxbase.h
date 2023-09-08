@@ -21,6 +21,7 @@
 #pragma once
 
 #include "indifocuser.h"
+#include "focuslynxhub.h"
 
 #include <indifocuser.h>
 #include <indicom.h>
@@ -46,13 +47,13 @@
 #define HUB_SETTINGS_TAB "Device"
 
 #define VERSION                 1
-#define SUBVERSION              46
+#define SUBVERSION              47
 
 class FocusLynxBase : public INDI::Focuser
 {
     public:
         FocusLynxBase();
-        FocusLynxBase(const char *target);
+        FocusLynxBase(FocusLynxHub *hub, const char *target);
 
         enum
         {
@@ -112,13 +113,24 @@ class FocusLynxBase : public INDI::Focuser
         bool ack();
         bool isResponseOK();
 
-    protected:
+protected:
         virtual bool SetFocuserMaxPosition(uint32_t ticks) override;
         virtual bool ReverseFocuser(bool enabled) override;
         virtual bool SyncFocuser(uint32_t ticks) override;
 
         virtual bool SetFocuserBacklash(int32_t steps) override;
         virtual bool SetFocuserBacklashEnabled(bool enabled) override;
+
+        // access to underlying focus hub
+        FocusLynxHub *focusHub()
+        {
+            return m_focusHub;
+        }
+        void setFocusHub(FocusLynxHub *newFocusHub)
+        {
+            m_focusHub = newFocusHub;
+        }
+
 
         // Move from private to public to validate
         bool configurationComplete;
@@ -168,6 +180,9 @@ class FocusLynxBase : public INDI::Focuser
         bool stop();
         bool home();
         bool center();
+
+        // hub shared between focusers
+        FocusLynxHub *m_focusHub = nullptr;
 
         // Led level
         bool setLedLevel(int level);

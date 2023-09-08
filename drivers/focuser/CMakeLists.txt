@@ -244,6 +244,7 @@ install(TARGETS indi_steeldrive_focus RUNTIME DESTINATION bin)
 # ############### FocusLynx Focuser ################
 SET(focuslynx_SRC
     focuslynxbase.cpp
+    focuslynxhub.cpp
     focuslynx.cpp)
 
 IF(UNITY_BUILD)
